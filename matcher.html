@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Find universities and degrees in South Africa that match your APS score. Filter by province, field and NSFAS."/>
+  <title>University Matcher 2026 | APSFinder</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">APS<span>Finder</span> 🎓</a>
+    <ul class="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="matcher.html" class="nav-active">Uni Matcher</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+  </nav>
+
+  <section class="matcher-section">
+
+    <div class="calc-header">
+      <h1>University Matcher 🏫</h1>
+      <p>Fill in your details below and we'll show every degree you qualify for.</p>
+    </div>
+
+    <div class="calc-card">
+
+      <!-- FILTERS -->
+      <div class="calc-step-label">
+        <span class="step-badge">Step 1</span>
+        Tell us about yourself
+      </div>
+
+      <div class="matcher-filters">
+
+        <!-- APS SCORE -->
+        <div class="filter-group">
+          <label class="filter-label">🎯 Your APS Score</label>
+          <input
+            type="number"
+            id="filter-aps"
+            class="filter-input"
+            placeholder="e.g. 32"
+            min="0"
+            max="49"
+          />
+          <span class="filter-hint">Auto-filled from calculator if available</span>
+        </div>
+
+        <!-- PROVINCE -->
+        <div class="filter-group">
+          <label class="filter-label">📍 Province Preference</label>
+          <select id="filter-province" class="filter-input">
+            <option value="all">All Provinces</option>
+            <option value="gauteng">Gauteng</option>
+            <option value="western-cape">Western Cape</option>
+            <option value="kwazulu-natal">KwaZulu-Natal</option>
+            <option value="eastern-cape">Eastern Cape</option>
+            <option value="free-state">Free State</option>
+            <option value="north-west">North West</option>
+            <option value="limpopo">Limpopo</option>
+            <option value="mpumalanga">Mpumalanga</option>
+            <option value="northern-cape">Northern Cape</option>
+          </select>
+        </div>
+
+        <!-- STUDY FIELD -->
+        <div class="filter-group">
+          <label class="filter-label">📚 Field of Study</label>
+          <select id="filter-field" class="filter-input">
+            <option value="all">All Fields</option>
+            <option value="health">Health Sciences</option>
+            <option value="engineering">Engineering & Technology</option>
+            <option value="commerce">Commerce & Business</option>
+            <option value="law">Law</option>
+            <option value="education">Education & Teaching</option>
+            <option value="humanities">Humanities & Social Sciences</option>
+            <option value="science">Natural Sciences</option>
+            <option value="arts">Arts & Design</option>
+            <option value="agriculture">Agriculture</option>
+            <option value="it">Information Technology</option>
+          </select>
+        </div>
+
+        <!-- NSFAS -->
+        <div class="filter-group">
+          <label class="filter-label">💰 NSFAS Funding</label>
+          <select id="filter-nsfas" class="filter-input">
+            <option value="all">All Universities</option>
+            <option value="yes">NSFAS Accredited Only</option>
+          </select>
+        </div>
+
+        <!-- UNI TYPE -->
+        <div class="filter-group">
+          <label class="filter-label">🏫 University Type</label>
+          <select id="filter-type" class="filter-input">
+            <option value="all">All Types</option>
+            <option value="public">Public Universities</option>
+            <option value="private">Private Colleges</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- SEARCH BUTTON -->
+      <button class="btn-main" id="find-btn" onclick="findDegrees()">
+        🔍 Find My Universities
+      </button>
+
+    </div>
+
+    <!-- RESULTS SECTION -->
+    <div id="results-section" style="display:none; margin-top: 2rem;">
+
+      <div class="results-header">
+        <div>
+          <h2 id="results-title">Results</h2>
+          <p id="results-subtitle" class="results-sub"></p>
+        </div>
+        <div class="results-count-badge" id="results-count"></div>
+      </div>
+      <!-- RESULTS DISCLAIMER -->
+    <div class="results-disclaimer">
+        <div class="results-disclaimer-icon">⚠️</div>
+        <div class="results-disclaimer-text">
+          <strong>Meeting the minimum APS does not guarantee admission.</strong>
+              Universities like UP, UCT and Wits receive thousands of applications and 
+              shortlist candidates based on their actual marks — not just the minimum APS. 
+              A higher APS significantly improves your chances. Always apply early, 
+              check subject-specific requirements, and have a backup option.
+    </div>
+    </div>
+
+      <!-- SPONSORED SLOT — for future ad/sponsorship -->
+      <div class="sponsored-slot" id="sponsored-slot" style="display:none;">
+        <div class="sponsored-badge">⭐ Featured</div>
+        <div class="sponsored-content" id="sponsored-content"></div>
+      </div>
+
+      <!-- RESULTS TABLE -->
+      <div class="results-table-wrap">
+        <table class="results-table" id="results-table">
+          <thead>
+            <tr>
+              <th>University</th>
+              <th>Degree</th>
+              <th>Field</th>
+              <th>Min APS</th>
+              <th>Duration</th>
+              <th>NSFAS</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="results-body">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NO RESULTS -->
+      <div id="no-results" style="display:none;" class="no-results-box">
+        <div class="no-results-emoji">😔</div>
+        <h3>No matches found</h3>
+        <p>Try lowering your APS filter or selecting "All Provinces" and "All Fields".</p>
+        <a href="calculator.html" class="btn-main" style="margin-top:1rem; display:inline-block;">
+          Recalculate My APS →
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo">APS<span>Finder</span> 🎓</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="calculator.html">Calculator</a>
+        <a href="matcher.html">Uni Matcher</a>
+        <a href="#">Blog</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 APSFinder · Built with ❤️ for South African Students</p>
+      <p class="footer-disclaimer">APS cutoffs are based on 2025/2026 prospectus data. Always confirm with your chosen university.</p>
+    </div>
+  </footer>
+
+  <script src="js/matcher.js"></script>
+</body>
+</html>

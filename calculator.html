@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Calculate your APS score for South African universities. Free and instant."/>
+  <title>APS Calculator 2026 | APSFinder</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+ <nav class="navbar">
+  <a href="index.html" class="logo">APS<span>Finder</span> 🎓</a>
+  <ul class="nav-links">
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="calculator.html" class="nav-active">Calculator</a></li>
+    <li><a href="matcher.html">Uni Matcher</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+</nav>
+  <section class="calc-section">
+
+    <div class="calc-header">
+      <h1>APS Calculator 🎯</h1>
+      <p>Enter your marks below — your APS score updates instantly as you type.</p>
+    </div>
+    <!-- DISCLAIMER -->
+<div class="calc-disclaimer">
+  <span class="disclaimer-icon">ℹ️</span>
+  <p>
+    Your APS is calculated using the <strong>standard South African formula</strong>. 
+    Some universities use a different points scale, add bonus points for Pure Mathematics, 
+    or have faculty-specific requirements. Use this score as a <strong>starting point</strong> — 
+    always confirm your final score on the official university website before applying.
+  </p>
+</div>
+
+    <div class="calc-card">
+
+      <!-- STEP 1 LABEL -->
+      <div class="calc-step-label">
+        <span class="step-badge">Step 1</span>
+        Enter your subject marks
+      </div>
+
+      <!-- LO CHECKBOX -->
+      <div class="lo-notice">
+        <input type="checkbox" id="includeLO" />
+        <label for="includeLO">
+          Include Life Orientation
+          <span class="lo-hint">(counted at half value only tick if your university requires it)</span>
+        </label>
+      </div>
+
+      <!-- TABLE HEADERS -->
+      <div class="subjects-header">
+        <span>Subject</span>
+        <span>Your Mark (%)</span>
+        <span>APS Points</span>
+      </div>
+
+      <!-- SUBJECT ROWS -->
+      <div id="subject-list">
+
+        <!-- ROW 1: HOME LANGUAGE -->
+        <div class="subject-row" data-required="true">
+          <select class="subject-select">
+            <option value="">-- Home Language --</option>
+            <option value="af-home">Afrikaans Home Language</option>
+            <option value="en-home">English Home Language</option>
+            <option value="zu-home">IsiZulu Home Language</option>
+            <option value="xh-home">IsiXhosa Home Language</option>
+            <option value="st-home">Sesotho Home Language</option>
+            <option value="tn-home">Setswana Home Language</option>
+            <option value="ss-home">SiSwati Home Language</option>
+            <option value="ve-home">Tshivenda Home Language</option>
+            <option value="ts-home">Xitsonga Home Language</option>
+            <option value="nso-home">Sepedi Home Language</option>
+            <option value="nd-home">IsiNdebele Home Language</option>
+            <option value="so-home">Sesotho sa Leboa Home Language</option>
+          </select>
+          <input type="number" class="mark-input" placeholder="0 - 100" min="0" max="100"/>
+          <span class="aps-points">0</span>
+        </div>
+
+        <!-- ROW 2: FIRST ADDITIONAL LANGUAGE -->
+        <div class="subject-row" data-required="true">
+          <select class="subject-select">
+            <option value="">-- First Additional Language --</option>
+            <option value="af-fal">Afrikaans First Additional Language</option>
+            <option value="en-fal">English First Additional Language</option>
+            <option value="zu-fal">IsiZulu First Additional Language</option>
+            <option value="xh-fal">IsiXhosa First Additional Language</option>
+            <option value="st-fal">Sesotho First Additional Language</option>
+            <option value="tn-fal">Setswana First Additional Language</option>
+            <option value="ss-fal">SiSwati First Additional Language</option>
+            <option value="ve-fal">Tshivenda First Additional Language</option>
+            <option value="ts-fal">Xitsonga First Additional Language</option>
+            <option value="nso-fal">Sepedi First Additional Language</option>
+            <option value="nd-fal">IsiNdebele First Additional Language</option>
+            <option value="so-fal">Sesotho sa Leboa First Additional Language</option>
+            <option value="fr-fal">French First Additional Language</option>
+            <option value="de-fal">German First Additional Language</option>
+            <option value="pt-fal">Portuguese First Additional Language</option>
+            <option value="ar-fal">Arabic First Additional Language</option>
+            <option value="hi-fal">Hindi First Additional Language</option>
+            <option value="ur-fal">Urdu First Additional Language</option>
+            <option value="gu-fal">Gujarati First Additional Language</option>
+            <option value="ta-fal">Tamil First Additional Language</option>
+            <option value="te-fal">Telugu First Additional Language</option>
+          </select>
+          <input type="number" class="mark-input" placeholder="0 - 100" min="0" max="100"/>
+          <span class="aps-points">0</span>
+        </div>
+
+        <!-- ROWS 3-7: ELECTIVE SUBJECTS -->
+        <div class="subject-row">
+          <select class="subject-select elective-select">
+            <option value="">-- Select Subject --</option>
+            <optgroup label="Mathematics">
+              <option value="mathematics">Mathematics</option>
+              <option value="maths-literacy">Mathematical Literacy</option>
+              <option value="technical-mathematics">Technical Mathematics</option>
+            </optgroup>
+            <optgroup label="Sciences">
+              <option value="physical-sciences">Physical Sciences</option>
+              <option value="life-sciences">Life Sciences</option>
+              <option value="agricultural-sciences">Agricultural Sciences</option>
+              <option value="technical-sciences">Technical Sciences</option>
+            </optgroup>
+            <optgroup label="Commerce">
+              <option value="accounting">Accounting</option>
+              <option value="business-studies">Business Studies</option>
+              <option value="economics">Economics</option>
+            </optgroup>
+            <optgroup label="Humanities">
+              <option value="geography">Geography</option>
+              <option value="history">History</option>
+              <option value="religion-studies">Religion Studies</option>
+              <option value="philosophy">Philosophy</option>
+            </optgroup>
+            <optgroup label="Technology">
+              <option value="computer-applications">Computer Applications Technology</option>
+              <option value="information-technology">Information Technology</option>
+              <option value="engineering-graphics">Engineering Graphics & Design</option>
+              <option value="civil-technology">Civil Technology</option>
+              <option value="electrical-technology">Electrical Technology</option>
+              <option value="mechanical-technology">Mechanical Technology</option>
+            </optgroup>
+            <optgroup label="Arts & Culture">
+              <option value="visual-arts">Visual Arts</option>
+              <option value="dramatic-arts">Dramatic Arts</option>
+              <option value="music">Music</option>
+              <option value="dance-studies">Dance Studies</option>
+              <option value="design">Design</option>
+            </optgroup>
+            <optgroup label="Hospitality & Tourism">
+              <option value="tourism">Tourism</option>
+              <option value="hospitality-studies">Hospitality Studies</option>
+              <option value="consumer-studies">Consumer Studies</option>
+            </optgroup>
+            <optgroup label="Agricultural">
+              <option value="agricultural-management">Agricultural Management Practices</option>
+              <option value="agricultural-technology">Agricultural Technology</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="life-orientation">Life Orientation</option>
+              <option value="sport-exercise">Sport & Exercise Science</option>
+              <option value="marine-sciences">Marine Sciences</option>
+            </optgroup>
+          </select>
+          <input type="number" class="mark-input" placeholder="0 - 100" min="0" max="100"/>
+          <span class="aps-points">0</span>
+        </div>
+
+        <div class="subject-row">
+          <select class="subject-select elective-select">
+            <option value="">-- Select Subject --</option>
+            <optgroup label="Mathematics">
+              <option value="mathematics">Mathematics</option>
+              <option value="maths-literacy">Mathematical Literacy</option>
+              <option value="technical-mathematics">Technical Mathematics</option>
+            </optgroup>
+            <optgroup label="Sciences">
+              <option value="physical-sciences">Physical Sciences</option>
+              <option value="life-sciences">Life Sciences</option>
+              <option value="agricultural-sciences">Agricultural Sciences</option>
+              <option value="technical-sciences">Technical Sciences</option>
+            </optgroup>
+            <optgroup label="Commerce">
+              <option value="accounting">Accounting</option>
+              <option value="business-studies">Business Studies</option>
+              <option value="economics">Economics</option>
+            </optgroup>
+            <optgroup label="Humanities">
+              <option value="geography">Geography</option>
+              <option value="history">History</option>
+              <option value="religion-studies">Religion Studies</option>
+              <option value="philosophy">Philosophy</option>
+            </optgroup>
+            <optgroup label="Technology">
+              <option value="computer-applications">Computer Applications Technology</option>
+              <option value="information-technology">Information Technology</option>
+              <option value="engineering-graphics">Engineering Graphics & Design</option>
+              <option value="civil-technology">Civil Technology</option>
+              <option value="electrical-technology">Electrical Technology</option>
+              <option value="mechanical-technology">Mechanical Technology</option>
+            </optgroup>
+            <optgroup label="Arts & Culture">
+              <option value="visual-arts">Visual Arts</option>
+              <option value="dramatic-arts">Dramatic Arts</option>
+              <option value="music">Music</option>
+              <option value="dance-studies">Dance Studies</option>
+              <option value="design">Design</option>
+            </optgroup>
+            <optgroup label="Hospitality & Tourism">
+              <option value="tourism">Tourism</option>
+              <option value="hospitality-studies">Hospitality Studies</option>
+              <option value="consumer-studies">Consumer Studies</option>
+            </optgroup>
+            <optgroup label="Agricultural">
+              <option value="agricultural-management">Agricultural Management Practices</option>
+              <option value="agricultural-technology">Agricultural Technology</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="life-orientation">Life Orientation</option>
+              <option value="sport-exercise">Sport & Exercise Science</option>
+              <option value="marine-sciences">Marine Sciences</option>
+            </optgroup>
+          </select>
+          <input type="number" class="mark-input" placeholder="0 - 100" min="0" max="100"/>
+          <span class="aps-points">0</span>
+        </div>
+
+        <div class="subject-row">
+          <select class="subject-select elective-select">
+            <option value="">-- Select Subject --</option>
+            <optgroup label="Mathematics">
+              <option value="mathematics">Mathematics</option>
+              <option value="maths-literacy">Mathematical Literacy</option>
+              <option value="technical-mathematics">Technical Mathematics</option>
+            </optgroup>
+            <optgroup label="Sciences">
+              <option value="physical-sciences">Physical Sciences</option>
+              <option value="life-sciences">Life Sciences</option>
+              <option value="agricultural-sciences">Agricultural Sciences</option>
+              <option value="technical-sciences">Technical Sciences</option>
+            </optgroup>
+            <optgroup label="Commerce">
+              <option value="accounting">Accounting</option>
+              <option value="business-studies">Business Studies</option>
+              <option value="economics">Economics</option>
+            </optgroup>
+            <optgroup label="Humanities">
+              <option value="geography">Geography</option>
+              <option value="history">History</option>
+              <option value="religion-studies">Religion Studies</option>
+              <option value="philosophy">Philosophy</option>
+            </optgroup>
+            <optgroup label="Technology">
+              <option value="computer-applications">Computer Applications Technology</option>
+              <option value="information-technology">Information Technology</option>
+              <option value="engineering-graphics">Engineering Graphics & Design</option>
+              <option value="civil-technology">Civil Technology</option>
+              <option value="electrical-technology">Electrical Technology</option>
+              <option value="mechanical-technology">Mechanical Technology</option>
+            </optgroup>
+            <optgroup label="Arts & Culture">
+              <option value="visual-arts">Visual Arts</option>
+              <option value="dramatic-arts">Dramatic Arts</option>
+              <option value="music">Music</option>
+              <option value="dance-studies">Dance Studies</option>
+              <option value="design">Design</option>
+            </optgroup>
+            <optgroup label="Hospitality & Tourism">
+              <option value="tourism">Tourism</option>
+              <option value="hospitality-studies">Hospitality Studies</option>
+              <option value="consumer-studies">Consumer Studies</option>
+            </optgroup>
+            <optgroup label="Agricultural">
+              <option value="agricultural-management">Agricultural Management Practices</option>
+              <option value="agricultural-technology">Agricultural Technology</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="life-orientation">Life Orientation</option>
+              <option value="sport-exercise">Sport & Exercise Science</option>
+              <option value="marine-sciences">Marine Sciences</option>
+            </optgroup>
+          </select>
+          <input type="number" class="mark-input" placeholder="0 - 100" min="0" max="100"/>
+          <span class="aps-points">0</span>
+        </div>
+
+        <div class="subject-row">
+          <select class="subject-select elective-select">
+            <option value="">-- Select Subject --</option>
+            <optgroup label="Mathematics">
+              <option value="mathematics">Mathematics</option>
+              <option value="maths-literacy">Mathematical Literacy</option>
+              <option value="technical-mathematics">Technical Mathematics</option>
+            </optgroup>
+            <optgroup label="Sciences">
+              <option value="physical-sciences">Physical Sciences</option>
+              <option value="life-sciences">Life Sciences</option>
+              <option value="agricultural-sciences">Agricultural Sciences</option>
+              <option value="technical-sciences">Technical Sciences</option>
+            </optgroup>
+            <optgroup label="Commerce">
+              <option value="accounting">Accounting</option>
+              <option value="business-studies">Business Studies</option>
+              <option value="economics">Economics</option>
+            </optgroup>
+            <optgroup label="Humanities">
+              <option value="geography">Geography</option>
+              <option value="history">History</option>
+              <option value="religion-studies">Religion Studies</option>
+              <option value="philosophy">Philosophy</option>
+            </optgroup>
+            <optgroup label="Technology">
+              <option value="computer-applications">Computer Applications Technology</option>
+              <option value="information-technology">Information Technology</option>
+              <option value="engineering-graphics">Engineering Graphics & Design</option>
+              <option value="civil-technology">Civil Technology</option>
+              <option value="electrical-technology">Electrical Technology</option>
+              <option value="mechanical-technology">Mechanical Technology</option>
+            </optgroup>
+            <optgroup label="Arts & Culture">
+              <option value="visual-arts">Visual Arts</option>
+              <option value="dramatic-arts">Dramatic Arts</option>
+              <option value="music">Music</option>
+              <option value="dance-studies">Dance Studies</option>
+              <option value="design">Design</option>
+            </optgroup>
+            <optgroup label="Hospitality & Tourism">
+              <option value="tourism">Tourism</option>
+              <option value="hospitality-studies">Hospitality Studies</option>
+              <option value="consumer-studies">Consumer Studies</option>
+            </optgroup>
+            <optgroup label="Agricultural">
+              <option value="agricultural-management">Agricultural Management Practices</option>
+              <option value="agricultural-technology">Agricultural Technology</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="life-orientation">Life Orientation</option>
+              <option value="sport-exercise">Sport & Exercise Science</option>
+              <option value="marine-sciences">Marine Sciences</option>
+            </optgroup>
+          </select>
+          <input type="number" class="mark-input" placeholder="0 - 100" min="0" max="100"/>
+          <span class="aps-points">0</span>
+        </div>
+
+        <div class="subject-row">
+          <select class="subject-select elective-select">
+            <option value="">-- Select Subject --</option>
+            <optgroup label="Mathematics">
+              <option value="mathematics">Mathematics</option>
+              <option value="maths-literacy">Mathematical Literacy</option>
+              <option value="technical-mathematics">Technical Mathematics</option>
+            </optgroup>
+            <optgroup label="Sciences">
+              <option value="physical-sciences">Physical Sciences</option>
+              <option value="life-sciences">Life Sciences</option>
+              <option value="agricultural-sciences">Agricultural Sciences</option>
+              <option value="technical-sciences">Technical Sciences</option>
+            </optgroup>
+            <optgroup label="Commerce">
+              <option value="accounting">Accounting</option>
+              <option value="business-studies">Business Studies</option>
+              <option value="economics">Economics</option>
+            </optgroup>
+            <optgroup label="Humanities">
+              <option value="geography">Geography</option>
+              <option value="history">History</option>
+              <option value="religion-studies">Religion Studies</option>
+              <option value="philosophy">Philosophy</option>
+            </optgroup>
+            <optgroup label="Technology">
+              <option value="computer-applications">Computer Applications Technology</option>
+              <option value="information-technology">Information Technology</option>
+              <option value="engineering-graphics">Engineering Graphics & Design</option>
+              <option value="civil-technology">Civil Technology</option>
+              <option value="electrical-technology">Electrical Technology</option>
+              <option value="mechanical-technology">Mechanical Technology</option>
+            </optgroup>
+            <optgroup label="Arts & Culture">
+              <option value="visual-arts">Visual Arts</option>
+              <option value="dramatic-arts">Dramatic Arts</option>
+              <option value="music">Music</option>
+              <option value="dance-studies">Dance Studies</option>
+              <option value="design">Design</option>
+            </optgroup>
+            <optgroup label="Hospitality & Tourism">
+              <option value="tourism">Tourism</option>
+              <option value="hospitality-studies">Hospitality Studies</option>
+              <option value="consumer-studies">Consumer Studies</option>
+            </optgroup>
+            <optgroup label="Agricultural">
+              <option value="agricultural-management">Agricultural Management Practices</option>
+              <option value="agricultural-technology">Agricultural Technology</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="life-orientation">Life Orientation</option>
+              <option value="sport-exercise">Sport & Exercise Science</option>
+              <option value="marine-sciences">Marine Sciences</option>
+            </optgroup>
+          </select>
+          <input type="number" class="mark-input" placeholder="0 - 100" min="0" max="100"/>
+          <span class="aps-points">0</span>
+        </div>
+
+      </div>
+
+      <!-- ADD SUBJECT -->
+      <div class="subject-controls">
+        <button id="add-subject" class="btn-add">+ Add Subject</button>
+        <span id="subject-count">7 subjects</span>
+      </div>
+      <!-- CLEAR BUTTON -->
+      <div class="clear-row">
+        <button class="btn-clear" onclick="clearCalculator()">
+         🔄 Start Over / Clear All
+        </button>
+      </div>
+
+      <!-- ===== STEP 2: STANDARD APS RESULT ===== -->
+      <div class="calc-step-label">
+        <span class="step-badge">Step 2</span>
+        Your Standard APS Score
+        <span class="step-note">⬇️ This is your baseline score used by most SA universities</span>
+      </div>
+
+      <div class="result-box" id="result-box">
+        <div class="result-score">
+          <p>Standard APS</p>
+          <h2 id="aps-total">0</h2>
+        </div>
+        <div class="result-qualify" id="result-qualify">
+          <p>Enter your marks above to see your qualification level.</p>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3: UNIVERSITY SPECIFIC SCORES ===== -->
+      <div class="calc-step-label">
+        <span class="step-badge">Step 3</span>
+        Check a Specific University Score
+        <span class="step-note">🎓 These universities use their own scoring system — select one to see your score</span>
+      </div>
+
+      <!-- UNI SELECTOR BUTTONS -->
+      <div class="uni-selector">
+        <button class="uni-btn" data-uni="uct" onclick="calculateUniScore('uct')">
+          🎓 UCT
+        </button>
+        <button class="uni-btn" data-uni="up" onclick="calculateUniScore('up')">
+          🎓 UP
+        </button>
+        <button class="uni-btn" data-uni="wits" onclick="calculateUniScore('wits')">
+          🎓 Wits
+        </button>
+        <button class="uni-btn" data-uni="su" onclick="calculateUniScore('su')">
+          🎓 Stellenbosch
+        </button>
+      </div>
+
+      <!-- UNI SCORE RESULT (hidden until clicked) -->
+      <div class="uni-result-box" id="uni-result-box" style="display:none;">
+        <div class="uni-result-header" id="uni-result-header"></div>
+        <div class="uni-result-body" id="uni-result-body"></div>
+        <div class="uni-result-disclaimer" id="uni-result-disclaimer"></div>
+      </div>
+
+      <!-- CTA -->
+      <div class="calc-cta" style="margin-top: 1.5rem;">
+        <a href="matcher.html" class="btn-main">
+          🔍 Find Universities With My APS →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo">APS<span>Finder</span> 🎓</div>
+      <div class="footer-links">
+        <a href="calculator.html">Calculator</a>
+        <a href="matcher.html">Uni Matcher</a>
+        <a href="#">Blog</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 APSFinder · Built with ❤️ for South African Students</p>
+      <p class="footer-disclaimer">APS cutoffs are based on 2025/2026 prospectus data. Always confirm with your chosen university.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
