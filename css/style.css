@@ -792,8 +792,24 @@ footer {
     padding-bottom: 1rem;
   }
 
-  .navbar { padding: 1rem 1.5rem; }
-  .nav-links { gap: 1rem; }
+  .navbar {
+    padding: 1rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-links a {
+    padding: 0.3rem 0.6rem;
+  }
+
   .footer-top { flex-direction: column; text-align: center; }
 }
 /* ===== CALC STEP LABELS ===== */
