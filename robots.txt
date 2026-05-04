@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aps-calculator-sa-university.netlify.app/sitemap.xml
