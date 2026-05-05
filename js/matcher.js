@@ -463,3 +463,189 @@ function buildSubjectWarnings(hasMathsLit, hasTechMaths, hasMathsPure, hasPhysic
   const tableWrap = resultsSection.querySelector('.results-table-wrap');
   resultsSection.insertBefore(banner, tableWrap);
 }
+// ===================================================
+// NSFAS ELIGIBILITY CHECKER
+// ===================================================
+
+// Store selected options
+const nsfasAnswers = {
+  citizen: null,
+  sassa: null,
+  disability: null
+};
+
+
+// ===== HANDLE OPTION BUTTON CLICKS =====
+function selectNsfasOption(button) {
+  const question = button.dataset.question;
+  const value = button.dataset.value;
+
+  // Remove active from siblings
+  const siblings = document.querySelectorAll(
+    `[data-question="${question}"]`
+  );
+  siblings.forEach(btn => btn.classList.remove('nsfas-opt-active'));
+
+  // Set active
+  button.classList.add('nsfas-opt-active');
+  nsfasAnswers[question] = value;
+}
+
+
+// ===== CHECK NSFAS ELIGIBILITY =====
+function checkNSFAS() {
+  const income    = document.getElementById('nsfas-income').value;
+  const citizen   = nsfasAnswers.citizen;
+  const sassa     = nsfasAnswers.sassa;
+  const disability = nsfasAnswers.disability;
+
+  // Validate
+  if (!citizen || !income || !sassa || !disability) {
+    alert('Please answer all questions before checking.');
+    return;
+  }
+
+  let result = '';
+  let icon = '';
+  let title = '';
+  let message = '';
+  let steps = [];
+
+  // ── NOT ELIGIBLE ──
+  if (citizen === 'no') {
+    result  = 'not-eligible';
+    icon    = '❌';
+    title   = 'Not Eligible for NSFAS';
+    message = 'NSFAS funding is only available to South African citizens and permanent residents.';
+    steps   = [
+      'Look into international student bursaries',
+      'Check if your country of origin has bilateral agreements with SA',
+      'Contact your chosen university\'s financial aid office for alternatives'
+    ];
+
+  } else if (income === 'over-600k') {
+    result  = 'not-eligible';
+    icon    = '❌';
+    title   = 'Not Eligible for NSFAS';
+    message = 'Your household income exceeds the NSFAS threshold of R600,000 per year.';
+    steps   = [
+      'Look into merit bursaries from your chosen university',
+      'Check corporate bursaries in your field of study',
+      'Consider a student loan through Fundi or NSFAS private loans',
+      'Visit our bursaries page for alternatives'
+    ];
+
+  // ── LIKELY ELIGIBLE ──
+  } else if (
+    income === 'under-120k' ||
+    sassa  === 'yes' ||
+    disability === 'yes'
+  ) {
+    result  = 'likely';
+    icon    = '✅';
+    title   = 'Very Likely Eligible for NSFAS!';
+    message = 'Based on your answers you are very likely to qualify for NSFAS funding. NSFAS covers tuition, accommodation, meals and a living allowance.';
+    steps   = [
+      'Apply as early as possible — NSFAS opens around August/September each year',
+      'Make sure you are accepted at a public university first',
+      'Apply at nsfas.org.za — you will need your ID, matric results and proof of income',
+      'You can apply while still in Grade 12 using your Grade 11 results'
+    ];
+
+    if (sassa === 'yes') {
+      message += ' SASSA grant recipients are given priority by NSFAS.';
+    }
+    if (disability === 'yes') {
+      message += ' Students with disabilities may qualify for additional allowances.';
+    }
+
+  // ── POSSIBLY ELIGIBLE ──
+  } else if (income === '120k-250k' || income === '250k-350k') {
+    result  = 'possible';
+    icon    = '⚠️';
+    title   = 'Possibly Eligible for NSFAS';
+    message = 'Your household income falls within the NSFAS threshold. You may qualify for full or partial funding depending on your specific circumstances.';
+    steps   = [
+      'Apply for NSFAS anyway — a means test will determine your exact funding',
+      'Apply early as applications are competitive',
+      'Also apply for university-specific bursaries as a backup',
+      'Gather proof of all household income before applying'
+    ];
+
+  // ── UNLIKELY ──
+  } else if (income === '350k-600k') {
+    result  = 'unlikely';
+    icon    = '⚠️';
+    title   = 'Unlikely to Qualify for NSFAS';
+    message = 'Your household income is above the typical NSFAS threshold. You are unlikely to qualify for full NSFAS funding but may qualify for partial assistance.';
+    steps   = [
+      'Apply for merit bursaries at your chosen university',
+      'Check the Funza Lushaka bursary if you want to study teaching',
+      'Look into corporate bursaries — many companies fund students in their field',
+      'Consider a Fundi or NSFAS student loan',
+      'Visit our bursaries page for a full list of options'
+    ];
+  }
+
+  // ── SHOW RESULT ──
+  showNSFASResult(result, icon, title, message, steps);
+}
+
+
+// ===== SHOW NSFAS RESULT =====
+function showNSFASResult(result, icon, title, message, steps) {
+  const resultBox = document.getElementById('nsfas-result');
+  const box       = document.getElementById('nsfas-result-box');
+  const iconEl    = document.getElementById('nsfas-result-icon');
+  const titleEl   = document.getElementById('nsfas-result-title');
+  const messageEl = document.getElementById('nsfas-result-message');
+  const stepsEl   = document.getElementById('nsfas-result-steps');
+
+  resultBox.style.display = 'block';
+
+  // Set color based on result
+  box.className = 'nsfas-result-box nsfas-' + result;
+
+  iconEl.textContent    = icon;
+  titleEl.textContent   = title;
+  messageEl.textContent = message;
+
+  // Build steps list
+  stepsEl.innerHTML = '';
+  steps.forEach(function(step) {
+    const li = document.createElement('li');
+    li.textContent = step;
+    stepsEl.appendChild(li);
+  });
+
+  // Scroll to result
+  resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+
+// ===== EMAIL SUBSCRIBE =====
+function subscribeEmail() {
+  const email = document.getElementById('email-input').value;
+
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  // For now just show a thank you message
+  // Later we connect this to MailerLite or ConvertKit
+  const form = document.querySelector('.email-capture-form');
+  form.innerHTML = `
+    <div style="
+      background: #f0fff4;
+      border: 2px solid #86efac;
+      border-radius: 10px;
+      padding: 1rem;
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 0.9rem;
+    ">
+      ✅ You're on the list! We'll notify you when bursaries open.
+    </div>
+  `;
+}

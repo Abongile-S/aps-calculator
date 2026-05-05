@@ -176,6 +176,131 @@
     </div>
 
   </section>
+  <!-- NSFAS CHECKER SECTION -->
+<section class="nsfas-section">
+
+  <div class="nsfas-header">
+    <div class="section-tag">💰 NSFAS Eligibility</div>
+    <h2>Do you qualify for NSFAS funding? 🎓</h2>
+    <p>Answer 4 quick questions and we'll tell you if you likely qualify for NSFAS.</p>
+  </div>
+
+  <div class="calc-card">
+
+    <!-- STEP LABEL -->
+    <div class="calc-step-label">
+      <span class="step-badge">Quick Check</span>
+      Answer all questions honestly for the most accurate result
+    </div>
+
+    <!-- QUESTIONS -->
+    <div class="nsfas-questions">
+
+      <!-- CITIZENSHIP -->
+      <div class="nsfas-question">
+        <label class="filter-label">🇿🇦 Are you a South African citizen or permanent resident?</label>
+        <div class="nsfas-options">
+          <button class="nsfas-opt-btn" data-question="citizen" data-value="yes" onclick="selectNsfasOption(this)">
+            Yes
+          </button>
+          <button class="nsfas-opt-btn" data-question="citizen" data-value="no" onclick="selectNsfasOption(this)">
+            No
+          </button>
+        </div>
+      </div>
+
+      <!-- HOUSEHOLD INCOME -->
+      <div class="nsfas-question">
+        <label class="filter-label">💵 What is your combined household income per year?</label>
+        <select id="nsfas-income" class="filter-input">
+          <option value="">-- Select income range --</option>
+          <option value="under-120k">Under R120,000/year (Under R10,000/month)</option>
+          <option value="120k-250k">R120,000 - R250,000/year</option>
+          <option value="250k-350k">R250,000 - R350,000/year</option>
+          <option value="350k-600k">R350,000 - R600,000/year</option>
+          <option value="over-600k">Over R600,000/year</option>
+        </select>
+        <span class="filter-hint">Include all income from parents/guardians living with you</span>
+      </div>
+
+      <!-- SASSA -->
+      <div class="nsfas-question">
+        <label class="filter-label">🏛️ Does your family receive a SASSA grant?</label>
+        <div class="nsfas-options">
+          <button class="nsfas-opt-btn" data-question="sassa" data-value="yes" onclick="selectNsfasOption(this)">
+            Yes
+          </button>
+          <button class="nsfas-opt-btn" data-question="sassa" data-value="no" onclick="selectNsfasOption(this)">
+            No
+          </button>
+        </div>
+      </div>
+
+      <!-- DISABILITY -->
+      <div class="nsfas-question">
+        <label class="filter-label">♿ Do you have a disability?</label>
+        <div class="nsfas-options">
+          <button class="nsfas-opt-btn" data-question="disability" data-value="yes" onclick="selectNsfasOption(this)">
+            Yes
+          </button>
+          <button class="nsfas-opt-btn" data-question="disability" data-value="no" onclick="selectNsfasOption(this)">
+            No
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CHECK BUTTON -->
+    <button class="btn-main" onclick="checkNSFAS()" style="width:100%; margin-top:1rem;">
+      💰 Check My NSFAS Eligibility
+    </button>
+
+    <!-- RESULT BOX -->
+    <div id="nsfas-result" style="display:none; margin-top:1.5rem;">
+
+      <div class="nsfas-result-box" id="nsfas-result-box">
+        <div class="nsfas-result-icon" id="nsfas-result-icon"></div>
+        <div class="nsfas-result-content">
+          <h3 id="nsfas-result-title"></h3>
+          <p id="nsfas-result-message"></p>
+          <ul id="nsfas-result-steps"></ul>
+        </div>
+      </div>
+
+      <!-- EMAIL CAPTURE -->
+      <div class="email-capture-box">
+        <div class="email-capture-icon">🔔</div>
+        <div class="email-capture-content">
+          <h3>Get Bursary Deadline Alerts</h3>
+          <p>We'll notify you when bursaries and NSFAS applications open — completely free.</p>
+          <div class="email-capture-form">
+            <input
+              type="email"
+              id="email-input"
+              placeholder="Enter your email address"
+              class="email-input"
+            />
+            <button class="btn-main" onclick="subscribeEmail()" style="white-space:nowrap;">
+              Notify Me 🔔
+            </button>
+          </div>
+          <p class="email-disclaimer">No spam. Unsubscribe anytime. POPIA compliant.</p>
+        </div>
+      </div>
+
+      <!-- NSFAS LINK -->
+      <div class="nsfas-official-link">
+        <p>Always apply directly on the official NSFAS website:</p>
+        <a href="https://www.nsfas.org.za/content/apply.html" target="_blank" class="btn-main" style="display:inline-block; margin-top:0.75rem;">
+          Apply on NSFAS.org.za →
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
   <footer>
     <div class="footer-top">
